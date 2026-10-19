@@ -6,7 +6,23 @@
 
 ## 2. Makalenin Amacı ve Araştırma Soruları
 
-*Makalenin çözmeyi hedeflediği problem ve RQ1–RQ2 araştırma soruları incelenecektir.*
+Yanakiev, Lazar ve Capiluppi (2025) tarafından gerçekleştirilen araştırma, uzun yıllar boyunca geliştirilen yazılım sistemlerinde biriken mimari teknik borcun azaltılmasına odaklanmaktadır. Çalışma, Hollanda merkezli ASML şirketinin mevcut C++ yazılım sistemi üzerinde gerçekleştirilen endüstriyel bir refactoring deneyimini incelemektedir.
+
+Araştırmada ele alınan temel problem, yazılım geliştirme standartları ve analiz araçları kullanılmasına rağmen bileşenler arasında sıkı bağlılıkların ve mimari kurallara aykırı bağımlılıkların oluşmasıdır. Bu tür sorunlar, yazılımın bakımını ve gelecekte geliştirilmesini zorlaştırmaktadır.
+
+Çalışmanın temel amacı, mevcut yazılım ölçümlerinden yararlanarak bakım açısından öncelikli üç bileşeni belirlemek ve bu bileşenlerde SOLID tasarım prensiplerini uygulamaktır. Araştırmacılar özellikle Dependency Inversion Principle (DIP) prensibinin somut ve tekrarlanabilir refactoring işlemlerine dönüştürülmesini ele almaktadır.
+
+Bu kapsamda çalışma iki araştırma sorusuna dayanmaktadır:
+
+**RQ1 — Veriye Dayalı Önceliklendirme:** Veriye dayalı bir yaklaşım, endüstriyel ortamda mimari teknik borcun azaltılmasına yönelik çalışmaların önceliklendirilmesine nasıl katkı sağlar?
+
+İlk araştırma sorusu, büyük ölçekli bir yazılım sisteminde bakım çalışmalarına hangi bileşenlerden başlanması gerektiğiyle ilgilidir. Araştırmacılar, mevcut yazılım ve süreç ölçümlerinin önceliklendirme kararlarını nasıl destekleyebileceğini incelemektedir.
+
+**RQ2 — SOLID Prensiplerinin Somutlaştırılması:** SOLID tasarım prensipleri, mevcut yazılım sisteminde uygulanabilecek somut refactoring kalıplarına nasıl dönüştürülebilir?
+
+İkinci araştırma sorusu, teorik tasarım prensiplerinin gerçek yazılım koduna nasıl uygulanabileceğine odaklanmaktadır. Özellikle DIP prensibinin uygulanması için gerekli kod düzenlemelerinin belirlenmesi ve bunların tekrarlanabilir kalıplar hâline getirilmesi araştırılmaktadır.
+
+Bu iki soru birlikte değerlendirildiğinde RQ1'in hangi bileşenlere müdahale edileceğini, RQ2'nin ise bu bileşenlerin nasıl yeniden düzenleneceğini ele aldığı görülmektedir. Dolayısıyla çalışma, mimari teknik borcun azaltılmasında hem önceliklendirme hem de uygulama aşamalarını kapsamaktadır.
 
 ## 3. Teorik Arka Plan
 
