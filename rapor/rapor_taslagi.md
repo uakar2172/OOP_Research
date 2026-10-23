@@ -27,8 +27,32 @@ Bu iki soru birlikte değerlendirildiğinde RQ1'in hangi bileşenlere müdahale 
 ## 3. Teorik Arka Plan
 
 ### 3.1. Nesneye Dayalı Programlama (OOP)
+Nesneye Dayalı Programlama (Object-Oriented Programming — OOP), yazılım sistemlerinin sınıflar ve nesneler aracılığıyla modellenmesine dayanan bir programlama paradigmasıdır. OOP yaklaşımı; kapsülleme (encapsulation), soyutlama (abstraction), kalıtım (inheritance) ve çok biçimlilik (polymorphism) gibi temel kavramları içermektedir.
+
+Kapsülleme, bir nesnenin verilerinin ve bu veriler üzerinde gerçekleştirilen işlemlerin bir arada tutulmasını, nesnenin iç durumuna erişimin kontrollü şekilde yönetilmesini ifade etmektedir. Soyutlama, yazılım bileşenlerinin temel işlevlerini ön plana çıkarırken uygulama ayrıntılarını gizlemeyi amaçlamaktadır.
+
+Kalıtım, sınıflar arasında tür ilişkileri kurulmasına ve belirli özelliklerin devralınmasına olanak sağlamaktadır. Çok biçimlilik ise farklı nesnelerin ortak bir üst tür veya arayüz üzerinden kullanılabilmesini mümkün kılmaktadır.
+
+Bu kavramlar, büyük ölçekli yazılım sistemlerinde bileşenlerin sorumluluklarını ve birbirleriyle olan ilişkilerini düzenlemek açısından önem taşımaktadır. Bununla birlikte, OOP mekanizmalarının kullanılması tek başına sürdürülebilir bir yazılım mimarisi oluşturulduğu anlamına gelmemektedir. Bileşenler arasındaki bağımlılıkların uygun şekilde tasarlanması da gerekmektedir.
 
 ### 3.2. SOLID Tasarım Prensipleri
+SOLID, nesneye dayalı yazılım tasarımında bakım yapılabilirliği, genişletilebilirliği ve esnekliği desteklemeyi amaçlayan beş temel tasarım prensibinin baş harflerinden oluşmaktadır.
+
+Single Responsibility Principle (SRP): Bir sınıfın değişmesi için tek bir temel neden bulunması gerektiğini ifade etmektedir. Sınıfların farklı sorumluluklarla gereğinden fazla yüklenmesini önlemeye yönelik bir tasarım yaklaşımıdır.
+
+Open/Closed Principle (OCP): Yazılım bileşenlerinin genişletilmeye açık, mevcut kodlarının değiştirilmesine ise mümkün olduğunca kapalı olması gerektiğini belirtmektedir. Yeni özelliklerin mevcut bileşenler üzerinde gereksiz değişikliklere neden olmadan eklenmesini hedeflemektedir.
+
+Liskov Substitution Principle (LSP): Bir alt türün, üst türün yerine kullanıldığında beklenen davranış sözleşmesini koruması gerektiğini ifade etmektedir. Bu prensip, özellikle kalıtım ilişkilerinin doğru tasarlanması açısından önem taşımaktadır.
+
+Interface Segregation Principle (ISP): Yazılım bileşenlerinin kullanmadıkları arayüz metotlarına bağımlı olmaya zorlanmaması gerektiğini belirtmektedir. Gereksiz bağımlılıkları azaltmak amacıyla arayüzlerin sorumluluklarına göre ayrılmasını desteklemektedir.
+
+Dependency Inversion Principle (DIP): Yüksek seviyeli modüllerin düşük seviyeli modüllerin somut uygulamalarına değil, soyutlamalara bağımlı olması gerektiğini ifade etmektedir. Soyutlamaların uygulama ayrıntılarından bağımsız tutulması ve somut bileşenlerin bu soyutlamalara uygun şekilde geliştirilmesi amaçlanmaktadır.
+
+SOLID prensipleri, OOP'nin sunduğu soyutlama, kalıtım ve çok biçimlilik gibi mekanizmaların daha sürdürülebilir tasarım kararlarıyla kullanılmasına rehberlik etmektedir.
+
+İncelenen Yanakiev, Lazar ve Capiluppi (2025) çalışmasında SOLID prensipleri, mevcut C++ yazılım sistemindeki mimari teknik borcun azaltılmasında temel tasarım yaklaşımı olarak ele alınmaktadır. Araştırmanın uygulama aşamasında özellikle Dependency Inversion Principle (DIP) üzerinde durulmaktadır.
+
+Bu bağlamda makale, nesneye dayalı tasarım prensiplerinin büyük ölçekli endüstriyel yazılım sistemlerindeki mimari bağımlılık sorunlarının giderilmesinde nasıl kullanılabileceğini ortaya koymayı amaçlamaktadır.
 
 ### 3.3. Legacy Code ve Teknik Borç
 
