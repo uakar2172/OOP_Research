@@ -56,9 +56,33 @@ Bu bağlamda makale, nesneye dayalı tasarım prensiplerinin büyük ölçekli e
 
 ### 3.3. Legacy Code ve Teknik Borç
 
+Legacy Code (miras kod), geçmişte geliştirilmiş ve günümüzde kullanılmaya devam edilen mevcut yazılım kodunu ifade etmektedir. Bu tür sistemler, uzun yıllar boyunca farklı gereksinimler doğrultusunda değiştirilmiş ve genişletilmiş olabilir. Bir yazılımın eski olması, mutlaka hatalı veya işlevsiz olduğu anlamına gelmemektedir. Bununla birlikte, zaman içerisinde oluşan karmaşık bağımlılıklar, yetersiz dokümantasyon ve tasarım sorunları mevcut sistemlerin bakımını zorlaştırabilmektedir.
+
+Bu sorunlarla ilişkili temel kavramlardan biri Technical Debt (Teknik Borç) olarak adlandırılmaktadır. Teknik borç, yazılım geliştirme sürecinde alınan tasarım ve uygulama kararlarının gelecekte ek bakım ve geliştirme maliyetlerine neden olmasını ifade etmektedir. Teknik borç, kısa vadede zaman kazanmak amacıyla yapılan bilinçli tercihler sonucunda oluşabileceği gibi yazılımın zaman içerisinde değişen gereksinimlere yeterince uyarlanamaması nedeniyle de birikebilmektedir.
+
+Teknik borç farklı seviyelerde ortaya çıkabilmektedir. Kod seviyesindeki teknik borç (Code-Level Technical Debt), metotların ve sınıfların iç yapısındaki karmaşıklıklar, tekrarlanan kod parçaları veya sorumlulukların uygun şekilde ayrılmaması gibi sorunları kapsamaktadır.
+
+Mimari teknik borç (Architectural Technical Debt) ise daha geniş bir düzeyde, yazılım bileşenlerinin organizasyonu ve birbirleriyle olan bağımlılık ilişkilerinden kaynaklanmaktadır. Bileşenler arasında sıkı bağlılıkların oluşması, çok sayıda bağımlılığın bulunması ve mimari kuralların ihlal edilmesi bu tür teknik borcun örnekleridir.
+
+Yanakiev, Lazar ve Capiluppi (2025) tarafından gerçekleştirilen araştırma, özellikle mimari teknik borcun azaltılmasına odaklanmaktadır. Çalışmada, ASML şirketinin yaklaşık yirmi yıllık geliştirme geçmişine sahip C++ yazılım sisteminde, kodlama standartları ve analiz araçları kullanılmasına rağmen mimari bağımlılık sorunlarının devam ettiği belirtilmektedir.
+
+Araştırmacılar bu bağlamda özellikle sıkı bağlılık (tight coupling), fazla sayıda dış bağımlılık (large fan-out) ve mimari kurallara aykırı bağımlılıklar (illegal dependencies) üzerinde durmaktadır. Bu sorunlar, mevcut yazılım sisteminde bakım faaliyetlerinin karmaşıklığını artırabilen mimari teknik borç unsurları olarak ele alınmaktadır.
+
+Dolayısıyla makalenin temel problemi, yalnızca eski kodların okunabilirliğini iyileştirmek değil, büyük ölçekli bir yazılım sistemindeki bileşenler arası ilişkileri daha sürdürülebilir biçimde yeniden düzenlemektir.
+
 ### 3.4. Refactoring Kavramı
 
-*Bu bölümde makalenin anlaşılması için gerekli temel kavramlar açıklanacaktır.*
+Refactoring (yeniden düzenleme), bir yazılımın dışarıdan gözlemlenen davranışı korunurken iç yapısının iyileştirilmesi işlemidir. Bu yaklaşım, mevcut kodun bakım yapılabilirliğini, anlaşılabilirliğini ve gelecekte değiştirilebilirliğini artırmayı amaçlamaktadır.
+
+Refactoring işlemleri arasında uzun metotların daha küçük metotlara ayrılması, sınıfların sorumluluklarının yeniden düzenlenmesi ve yazılım bileşenleri arasındaki bağımlılıkların iyileştirilmesi yer alabilmektedir.
+
+Refactoring, yeni özellik geliştirme veya mevcut bir hatayı düzeltme işlemlerinden farklıdır. Temel amaç, sistemin sunduğu işlevleri değiştirmeden yazılımın iç tasarımını iyileştirmektir. Bu nedenle refactoring sürecinde mevcut davranışın korunmasının doğrulanması önem taşımaktadır.
+
+İncelenen makalede refactoring, büyük ölçekli bir C++ yazılım sistemindeki mimari bağımlılık problemlerini azaltmak amacıyla kullanılmaktadır. Araştırmacılar, bakım açısından öncelikli bileşenleri belirledikten sonra bu bileşenler üzerinde SOLID tasarım prensiplerinden yararlanarak yeniden düzenleme işlemleri gerçekleştirmektedir.
+
+Çalışmanın önemli özelliklerinden biri, tekrarlanan düzenleme işlemlerinin belirli refactoring kalıplarına (refactoring patterns) dönüştürülmesidir. Özellikle Dependency Inversion Principle (DIP) temelinde oluşturulan bu kalıplar, benzer mimari bağımlılık sorunlarının sistematik biçimde ele alınmasını amaçlamaktadır.
+
+Bu açıdan refactoring, makalede yalnızca kodun okunabilirliğini artıran bir yöntem olarak değil, mimari teknik borcun azaltılması için kullanılan bir iyileştirme yaklaşımı olarak değerlendirilmektedir. Araştırmanın sonraki bölümlerinde, bileşenlerin nasıl önceliklendirildiği ve söz konusu refactoring kalıplarının nasıl uygulandığı ayrıntılı olarak incelenecektir.
 
 ## 4. Makalenin Araştırma Yöntemi
 
