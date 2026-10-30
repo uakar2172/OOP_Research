@@ -151,11 +151,75 @@ Bu yaklaşım, büyük ölçekli bir yazılım sistemindeki tüm teknik borcun a
 Araştırmanın yöntemsel açıdan dikkat çekici yönü, sayısal metriklerin tek başına karar vermek için kullanılmaması, endüstriyel koşullar ve yazılım mimarlarının görüşleriyle birlikte değerlendirilmesidir. Bununla birlikte, araştırmacıların yalnızca mevcut şirket içi ölçümlere erişebilmesi, yöntemin veri kapsamı bakımından bir sınırlılık oluşturmaktadır.
 ## 5. SOLID Prensiplerinin Uygulanması
 
+Yanakiev, Lazar ve Capiluppi (2025) tarafından gerçekleştirilen araştırmanın uygulama aşamasında, ASML'nin mevcut C++ yazılım sistemindeki mimari bağımlılık sorunlarını azaltmak amacıyla SOLID tasarım prensiplerinden yararlanılmıştır. Çalışmanın temel odağını özellikle Dependency Inversion Principle (DIP) oluşturmaktadır.
+
+Araştırmacılar, soyut tasarım prensiplerinin büyük ölçekli bir yazılım sisteminde doğrudan uygulanmasının yeterince açık olmayabileceğinden hareketle, tekrarlanabilir refactoring kalıpları geliştirmiştir. Bu yaklaşım, makalenin ikinci araştırma sorusu olan RQ2 ile doğrudan ilişkilidir.
+
 ### 5.1. Dependency Inversion Principle (DIP)
+
+Dependency Inversion Principle, yüksek seviyeli yazılım modüllerinin düşük seviyeli modüllerin somut uygulamalarına doğrudan bağımlı olmaması gerektiğini ifade etmektedir. Bunun yerine, modüller arasındaki ilişkilerin uygun soyutlamalar üzerinden düzenlenmesi amaçlanmaktadır.
+
+Bu prensip, nesneye dayalı programlamadaki soyutlama ve kapsülleme kavramlarıyla yakından ilişkilidir. Modüllerin somut uygulama ayrıntılarından ayrılması, yazılımın bakımını ve değiştirilebilirliğini destekleyebilmektedir.
+
+İncelenen makalede DIP, ASML'nin katmanlı yazılım mimarisinde ortaya çıkan uygunsuz bağımlılıkların giderilmesinde temel tasarım yaklaşımı olarak kullanılmıştır. Araştırmacılar, özellikle alt seviyedeki bileşenlerin üst seviyedeki bileşenlere mimari kuralları ihlal edecek biçimde bağımlı olduğu durumlara odaklanmıştır.
+
+Çalışmada DIP prensibinin uygulanması yalnızca yeni arayüzler oluşturulmasıyla sınırlandırılmamıştır. Mevcut sembollerin doğru mimari katmanlara taşınması, kapsüllenmesi ve gereksiz derleme bağımlılıklarının kaldırılması gibi işlemler de uygulama kapsamına alınmıştır.
+
+Bu yönüyle araştırma, DIP prensibinin yalnızca sınıf seviyesinde değil, bileşenler arasındaki mimari ilişkilerin düzenlenmesinde de kullanılabileceğini göstermektedir.
 
 ### 5.2. Refactoring Yaklaşımları
 
-*Makaledeki somut refactoring uygulamaları ve bunların OOP prensipleriyle ilişkisi değerlendirilecektir.*
+Araştırmacılar, mimari bağımlılık ihlallerini gidermek amacıyla tekrarlanabilir refactoring kalıpları geliştirmiştir. Makalenin beşinci bölümünde bu kalıplar, mevcut mimari durumu ifade eden AS-IS ve hedeflenen mimari durumu ifade eden TO-BE gösterimleriyle açıklanmaktadır.
+
+Çalışmada toplam yedi refactoring kalıbı tanımlanmıştır. Bu kalıplar, makineye özgü bileşenler (Machine-Dependent) ve farklı makine türleri tarafından ortak kullanılabilen bileşenler (Machine-Independent) olmak üzere iki grupta incelenmektedir.
+
+#### 5.2.1. Machine-Dependent Refactoring Patterns
+
+Makineye özgü bileşenler için üç refactoring kalıbı geliştirilmiştir.
+
+**R1M — Exported Symbols:** Alt seviyedeki bir bileşenin üst seviyedeki bir bileşenden dışa aktarılan sembolleri mimari kurallara aykırı biçimde kullanması durumunu ele almaktadır. Çözüm olarak ilgili sembollerin uygun alt seviye bileşene taşınması ve kapsüllenmesi önerilmektedir.
+
+**R2M — Exported Symbols:** Alt seviyedeki bir bileşenin, üst seviyede dışa aktarılan sembol listesinin yalnızca belirli bir bölümünü kullanması durumuna odaklanmaktadır. Gerekli sembollerin uygun bileşene taşınmasıyla bağımlılıkların azaltılması amaçlanmaktadır.
+
+**R3M — Derleme Bağımlılığının Düzeltilmesi:** Kaynak kodda gerçek bir sembol kullanımı bulunmamasına rağmen derleme yapılandırmasında gereksiz bağımlılık tanımlanması nedeniyle oluşan mimari ihlalleri ele almaktadır. Bu kalıpta derleme bağımlılıklarının düzeltilmesiyle yanlış pozitif bağımlılık ihlallerinin giderilmesi hedeflenmektedir.
+
+Bu üç kalıp, mimari bağımlılık problemlerinin farklı nedenlerden kaynaklanabileceğini ve her problemin aynı kod düzenleme işlemiyle çözülemeyeceğini göstermektedir.
+
+#### 5.2.2. Machine-Independent Refactoring Patterns
+
+Makineden bağımsız ortak bileşenlerle ilişkili sorunların giderilmesi için dört refactoring kalıbı geliştirilmiştir.
+
+**R1C — Exported Symbols From Common Component:** Bir sembol listesinin mimari hiyerarşide uygun seviyedeki başka bir ortak bileşene taşınmasını öngörmektedir. Bu işlem sırasında ortak işlevlerin yeniden kullanılabilirliğinin korunması amaçlanmaktadır.
+
+**R2C — Ortak Sembol Listesinin Taşınması:** Ortak bileşendeki sembol listesinin gerekli alt kümesinin uygun başka bir ortak bileşene taşınmasına odaklanmaktadır. Kodun yerleştirileceği bileşenin belirlenmesi, yazılımın mimari yapısına ilişkin alan bilgisi gerektirmektedir.
+
+**R3C — Makineye Özgü Sembollerin Ayrılması:** Ortak bir bileşende bulunan ancak yalnızca belirli bir makineye özgü bileşenin kullandığı sembollerin ilgili makineye özgü bileşene taşınmasını ve kapsüllenmesini amaçlamaktadır.
+
+**R4C — Sembol Alt Kümesinin Kapsüllenmesi:** Ortak bileşendeki dışa aktarılmış sembollerin yalnızca belirli bir makineye özgü bileşen tarafından kullanılan alt kümesinin bu bileşene taşınmasını ele almaktadır. Böylece gereksiz dışa açık sembollerin ve uygunsuz bağımlılıkların azaltılması hedeflenmektedir.
+
+Ortak bileşenlere yönelik refactoring işlemleri, farklı makine türlerinin aynı bileşenleri kullanabilmesi nedeniyle daha kapsamlı değerlendirme gerektirmektedir. Araştırmacılar, bu işlemlerde alan bilgisinin ve yazılım mimarları arasındaki koordinasyonun önemli olduğunu vurgulamaktadır.
+
+### 5.3. Refactoring Kalıplarının OOP ile İlişkisi
+
+Makaledeki refactoring kalıpları, nesneye dayalı programlamanın soyutlama, kapsülleme ve modülerlik kavramlarıyla ilişkilidir.
+
+Sembollerin mantıksal olarak uygun bileşenlere taşınması, yazılım bileşenlerinin sorumluluklarının daha belirgin hâle getirilmesine yardımcı olmaktadır. Gereksiz dış bağımlılıkların kaldırılması ve sembollerin kapsüllenmesi ise bileşenler arasındaki sıkı bağlılığın azaltılmasını desteklemektedir.
+
+Bununla birlikte, makalede tanımlanan kalıpların tamamı doğrudan sınıf veya nesne seviyesinde uygulanmamaktadır. Bazı kalıplar bileşenler arasındaki mimari ilişkileri, bazıları ise derleme bağımlılıklarını düzenlemektedir.
+
+Dolayısıyla çalışma, OOP tasarım prensiplerinin daha geniş kapsamlı yazılım mimarisi iyileştirmelerine nasıl temel oluşturabileceğini göstermektedir.
+
+### 5.4. RQ2 Açısından Değerlendirme
+
+Makalenin ikinci araştırma sorusu, SOLID tasarım prensiplerinin mevcut yazılım sisteminde somut refactoring kalıplarına nasıl dönüştürülebileceğini incelemektedir.
+
+Araştırmacılar, DIP prensibinden hareketle farklı mimari bağımlılık problemleri için yedi tekrarlanabilir kalıp tanımlamıştır. Bu kalıplar, sorunların türüne göre uygulanabilecek düzenleme işlemlerini sistematik biçimde açıklamaktadır.
+
+Bu bağlamda araştırmanın önemli katkısı, DIP gibi soyut bir tasarım prensibinin mevcut C++ yazılım sistemindeki gerçek mimari sorunlara uyarlanabilecek somut işlemlere dönüştürülmesidir.
+
+Bununla birlikte, kalıpların uygulanabilirliği yazılımın mevcut mimarisine, bileşenlerin sorumluluklarına ve kullanılan geliştirme ortamına bağlıdır. Bu nedenle söz konusu kalıpların farklı projelere doğrudan ve değişiklik yapılmadan aktarılabileceği varsayılmamalıdır.
+
+Araştırmanın sonraki bölümünde, bu kalıpların uygulanması sonucunda elde edilen sayısal bulgular ve mimari bağımlılıklardaki değişimler değerlendirilecektir.
 
 ## 6. Bulgular ve Sonuçlar
 
