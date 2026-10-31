@@ -223,7 +223,118 @@ Araştırmanın sonraki bölümünde, bu kalıpların uygulanması sonucunda eld
 
 ## 6. Bulgular ve Sonuçlar
 
-*Makalenin elde ettiği sonuçlar, kullanılan ölçümler ve araştırma sorularına verilen yanıtlar incelenecektir.*
+Yanakiev, Lazar ve Capiluppi (2025) tarafından gerçekleştirilen araştırmada, ASML'nin uzun yıllardır geliştirilen C/C++ yazılım sisteminde birikmiş mimari teknik borcun azaltılması amacıyla uygulanan refactoring işlemlerinin sonuçları değerlendirilmiştir. Çalışma kapsamında üç bileşen (A, B ve C) arasındaki uygunsuz bağımlılıklar incelenmiş ve Dependency Inversion Principle (DIP) temelinde geliştirilen refactoring kalıplarından yararlanılmıştır.
+
+Araştırmanın bulguları, bileşenler arasındaki mimari bağımlılıkların azaltılması, dışa aktarılan sembollerin uygun şekilde yeniden düzenlenmesi ve kullanılan refactoring kalıplarının dağılımı üzerinden değerlendirilmektedir.
+
+### 6.1. A ve B Bileşenleri Arasındaki Refactoring Sonuçları
+
+Makalenin altıncı bölümünde, A ve B bileşenleri arasındaki uygunsuz bağımlılıkların giderilmesine yönelik işlemler açıklanmaktadır. Araştırmacılar, altı arayüz üzerinde gerçekleştirilen refactoring çalışmaları sonucunda bir giden ve bir gelen uygunsuz bağımlılığın kaldırıldığını bildirmiştir.
+
+Makalenin Table 4 tablosunda A–B kapsamındaki bağımlılık işlemlerinin refactoring kalıplarına göre dağılımı verilmiştir.
+
+| Refactoring kalıbı | Bağımlılık sayısı | Oran |
+|---|---:|---:|
+| R1M | 194 | %66,0 |
+| R2M | 99 | %33,7 |
+| R3M | 1 | %0,3 |
+| **Toplam** | **294** | **%100** |
+
+Bu verilere göre R1M, A–B bileşenleri arasındaki düzenlemelerde en sık kullanılan refactoring kalıbıdır. R1M kalıbı, mimari kurallara aykırı biçimde dışa aktarılan sembollerin mantıksal olarak uygun alt seviye bileşene taşınmasını esas almaktadır.
+
+R2M kalıbı 99 bağımlılık işlemiyle ikinci sırada yer alırken R3M yalnızca bir işlemde kullanılmıştır.
+
+Araştırmacılar, R2M kapsamında ele alınan bağımlılıkların %85'inden fazlasının tek bir arayüzde bulunduğunu belirterek bu dağılımın belirli bir arayüzden önemli ölçüde etkilendiğini ifade etmiştir.
+
+Bu nedenle kalıpların kullanım sıklığı, bütün yazılım projelerinde geçerli bir etkinlik sıralaması olarak yorumlanmamalıdır. Ayrıca tabloda yer alan 294 işlem, 294 ayrı bileşenler arası mimari bağımlılığın tamamen kaldırıldığı anlamına gelmemektedir.
+
+### 6.2. A ve C Bileşenleri Arasındaki Refactoring Sonuçları
+
+Çalışmada A ve C bileşenleri arasındaki bağımlılıklar da incelenmiştir. C bileşeni, farklı makine türlerinin ortak olarak kullanabildiği işlevleri içeren bir bileşendir. Dolayısıyla bu bileşenle ilişkili değişiklikler, birden fazla yazılım bileşenini ve geliştirme ekibini etkileyebilmektedir.
+
+Makalenin Table 4 tablosunda A–C kapsamındaki işlemler aşağıdaki şekilde sınıflandırılmıştır.
+
+| Refactoring kalıbı | Bağımlılık sayısı | Oran |
+|---|---:|---:|
+| R1C | 0 | %0 |
+| R2C | 35 | %79,5 |
+| R3C | 9 | %20,5 |
+| R4C | 0 | %0 |
+| **Toplam** | **44** | **%100** |
+
+Bu dağılımda R2C kalıbı yaklaşık %80 ile en büyük paya sahiptir. R2C, ortak bileşenlerde bulunan sembollerin uygun başka bir ortak bileşene taşınmasıyla ilişkilidir.
+
+Bununla birlikte, araştırmacılar ortak bileşenler arasındaki değişikliklerin daha geniş kapsamlı koordinasyon gerektirdiğini açıklamıştır. Çalışmanın zaman ve organizasyonel kapsamı nedeniyle belirlenen bütün bağımlılıkların giderilmesi mümkün olmamıştır.
+
+Makalenin 6.2. bölümünde, çalışma kapsamında makineye özgü bileşene taşınabilen dokuz bağımlılığın düzenlendiği belirtilmektedir. Bu nedenle tabloda sınıflandırılan 44 bağımlılık işleminin tamamı fiilen gerçekleştirilmiş refactoring işlemleri olarak değerlendirilmemelidir.
+
+Bu bulgu, büyük ölçekli yazılım sistemlerinde teknik olarak uygun bir refactoring çözümünün uygulanmasının organizasyonel koşullara da bağlı olduğunu göstermektedir.
+
+### 6.3. Mimari Bağımlılıklar ve Dışa Aktarılan Sembollerdeki Değişim
+
+Makalenin 6.1. bölümünde A–B bileşenleri arasındaki refactoring işlemleri sonucunda bir giden ve bir gelen uygunsuz bağımlılığın kaldırıldığı ve araştırma kapsamında %33'lük bir azalma sağlandığı belirtilmektedir.
+
+Buna karşılık makalenin sonuç bölümünde başlangıçta belirlenen dört uygunsuz bağımlılıktan ikisinin ortadan kaldırıldığı ve genel olarak %50 azalma elde edildiği raporlanmıştır.
+
+Genel sonuç bölümündeki oran şu şekilde hesaplanabilmektedir:
+
+(2 / 4) × 100 = %50
+
+Ancak makalenin 6.1. bölümünde bildirilen %33 oranının hesaplama tabanı aynı açıklıkta verilmemektedir. Bu nedenle söz konusu iki oranın hangi kapsamlar üzerinden hesaplandığı dikkatle değerlendirilmelidir.
+
+Araştırmacılar ayrıca uygunsuz biçimde kullanılan dışa aktarılmış sembollerin sayısında %85'in üzerinde azalma elde edildiğini bildirmiştir.
+
+Burada mimari bağımlılıkların azaltılması ile dışa aktarılmış sembollerin yeniden düzenlenmesi arasında ayrım yapılması gerekmektedir. Bileşenler arasındaki uygunsuz mimari ilişkilerin sayısı ve bu ilişkiler kapsamında kullanılan sembollerin sayısı farklı ölçütlerdir.
+
+Dolayısıyla araştırmada bildirilen %85'in üzerindeki iyileşme, yazılım sistemindeki toplam teknik borcun aynı oranda ortadan kaldırıldığı anlamına gelmemektedir.
+
+### 6.4. Araştırma Sorularının Bulgular Açısından Değerlendirilmesi
+
+#### 6.4.1. RQ1 — Veri Odaklı Önceliklendirme
+
+Makalenin birinci araştırma sorusu, veri odaklı bir yaklaşımın endüstriyel yazılım sistemlerinde mimari teknik borcun önceliklendirilmesine ve azaltılmasına nasıl katkıda bulunabileceğini incelemektedir.
+
+Araştırmacılar, mevcut yazılım metriklerini ve ASML yazılım mimarlarının alan bilgisini birlikte değerlendirerek bakım faaliyetleri için öncelikli bileşenleri belirlemiştir.
+
+Özellikle uygunsuz mimari bağımlılıkların giderilmesi yüksek öncelikli bir hedef olarak seçilmiş; yazılım sisteminin tamamını aynı anda yeniden düzenlemek yerine belirli bileşenlere odaklanılmıştır.
+
+Elde edilen sonuçlar, mevcut veriler ve etki analizi kullanılarak sınırlı kapsamda da olsa mimari teknik borcun azaltılabileceğine ilişkin endüstriyel bir örnek sunmaktadır.
+
+Bununla birlikte araştırma tek bir şirketin belirli yazılım sistemi üzerinde gerçekleştirildiğinden, aynı yaklaşımın farklı sistemlerde aynı düzeyde başarı sağlayacağı doğrudan ileri sürülemez.
+
+#### 6.4.2. RQ2 — SOLID Prensiplerinin Refactoring Kalıplarına Dönüştürülmesi
+
+İkinci araştırma sorusu, SOLID tasarım prensiplerinin somut ve tekrarlanabilir refactoring kalıplarına nasıl dönüştürülebileceğini incelemektedir.
+
+Araştırmacılar, özellikle Dependency Inversion Principle prensibini temel alarak yedi refactoring kalıbı geliştirmiştir.
+
+Bu kalıplar; uygunsuz biçimde dışa aktarılan sembollerin doğru bileşenlere taşınması, kapsüllenmesi, ortak bileşenlerdeki sorumlulukların yeniden düzenlenmesi ve gereksiz derleme bağımlılıklarının düzeltilmesi gibi işlemleri kapsamaktadır.
+
+Table 4'teki dağılımlar, bu kalıpların farklı mimari bağımlılık problemleri için kullanıldığını veya uygulanmak üzere sınıflandırıldığını göstermektedir.
+
+Çalışmanın bu açıdan temel katkısı, soyut bir yazılım tasarım prensibinin büyük ölçekli bir endüstriyel sistemde uygulanabilir bakım işlemlerine dönüştürülmesidir.
+
+### 6.5. Bulguların OOP ve Yazılım Mimarisi Açısından Değerlendirilmesi
+
+Araştırmanın bulguları, nesneye dayalı programlamada önemli olan soyutlama, kapsülleme ve modülerlik kavramlarının yazılım mimarisinin iyileştirilmesinde de rol oynayabileceğini göstermektedir.
+
+Sembollerin uygun bileşenlere taşınması, bileşenlerin sorumluluklarının daha açık biçimde ayrılmasını desteklemektedir. Gereksiz dış bağımlılıkların kaldırılması ise bileşenler arasındaki istenmeyen bağlılığı azaltmaya yöneliktir.
+
+Öte yandan çalışmadaki bütün düzenlemeler sınıf veya nesne düzeyinde gerçekleştirilmemiştir. Bazı işlemler bileşenler arası mimari ilişkileri, bazıları ise derleme yapılandırmalarını hedeflemektedir.
+
+Bu nedenle makalenin sonuçları, SOLID prensiplerinin yalnızca sınıf tasarımıyla sınırlı olmadığını; mevcut yazılımın daha geniş mimari yapısının iyileştirilmesine de rehberlik edebileceğini ortaya koymaktadır.
+
+### 6.6. Bulguların Genel Değerlendirmesi
+
+Araştırmacılar, büyük ölçekli legacy yazılım sistemlerinde bütün teknik borcu tek seferde gidermeye çalışmak yerine, etki analizine dayalı ve aşamalı bir refactoring yaklaşımını benimsemiştir.
+
+Çalışmada bildirilen sonuçlar, belirlenen uygunsuz mimari bağımlılıkların bir kısmının giderildiğini ve dışa aktarılan sembollerin uygun biçimde düzenlenmesi açısından önemli ilerleme kaydedildiğini göstermektedir.
+
+Bununla birlikte ortak bileşenlerdeki bazı bağımlılıkların giderilememiş olması, refactoring faaliyetlerinin yalnızca teknik bilgiye değil; zaman, kapsam, alan bilgisi ve ekipler arası koordinasyona da bağlı olduğunu ortaya koymaktadır.
+
+Bu incelemeye göre makalenin önemli katkısı, veri odaklı önceliklendirme yaklaşımını SOLID prensiplerinden türetilen tekrarlanabilir refactoring kalıplarıyla birleştirmesidir.
+
+Sonuçların farklı yazılım sistemlerine genellenebilirliği, raporlanan oranların açıklığı ve uygulama kapsamındaki sınırlılıklar ise eleştirel değerlendirme bölümünde ayrıca ele alınacaktır.
 
 ## 7. Literatür İncelemesi
 
