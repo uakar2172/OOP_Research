@@ -336,9 +336,84 @@ Bu incelemeye göre makalenin önemli katkısı, veri odaklı önceliklendirme y
 
 Sonuçların farklı yazılım sistemlerine genellenebilirliği, raporlanan oranların açıklığı ve uygulama kapsamındaki sınırlılıklar ise eleştirel değerlendirme bölümünde ayrıca ele alınacaktır.
 
-## 7. Literatür İncelemesi
+## 7. Literatür ve Temel Akademik Çalışmalar
 
-*Makalenin kaynakçasında yer alan en az üç temel akademik çalışma incelenecek ve bu çalışmaların araştırma konusuyla ilişkisi açıklanacaktır.*
+Yanakiev, Lazar ve Capiluppi (2025) tarafından gerçekleştirilen araştırma, nesneye dayalı yazılım tasarımı, yazılım yaşlanması, teknik borç yönetimi ve refactoring alanlarında daha önce ortaya konulmuş bilimsel çalışmalardan yararlanmaktadır. İncelenen makalenin literatürdeki konumunu değerlendirmek amacıyla, araştırmacıların doğrudan atıfta bulunduğu dört temel kaynak ele alınmıştır.
+
+Bu kaynaklar Robert C. Martin'in (2003) nesneye dayalı tasarım prensiplerine ilişkin eseri, Lenarduzzi ve arkadaşlarının (2021) teknik borç önceliklendirmesi konulu sistematik literatür taraması, Parnas'ın (1994) yazılım yaşlanması çalışması ve Abid ve arkadaşlarının (2020) refactoring araştırmalarını sınıflandıran literatür incelemesidir.
+
+### 7.1. Martin (2003): Nesneye Dayalı Tasarım Prensipleri
+
+Robert C. Martin'in *Agile Software Development: Principles, Patterns, and Practices* adlı eseri, nesneye dayalı yazılım geliştirmede tasarım prensiplerinin ve tasarım kalıplarının kullanımını ele almaktadır.
+
+Martin (2003), yazılım sistemlerinin değişen gereksinimlere uyum sağlayabilmesi için modüller arasındaki bağımlılıkların ve sorumlulukların uygun biçimde düzenlenmesini vurgulamaktadır. Bu kapsamda Dependency Inversion Principle (DIP), yüksek seviyeli modüllerin düşük seviyeli somut uygulamalara doğrudan bağımlı olmak yerine uygun soyutlamalara dayanmasını öneren temel tasarım prensiplerinden biridir.
+
+Yanakiev ve arkadaşları (2025), makalelerinin giriş bölümünde SOLID prensiplerini açıklarken Martin'in çalışmasına atıfta bulunmaktadır. ASML'nin legacy C++ sistemindeki mimari bağımlılık ihlallerini gidermek amacıyla geliştirilen refactoring kalıpları da özellikle DIP prensibi temelinde oluşturulmuştur.
+
+Bu yönüyle Martin'in eseri, incelenen araştırmanın teorik tasarım temelini oluşturmaktadır. Yanakiev ve arkadaşlarının katkısı ise bu teorik prensibi mevcut bir endüstriyel yazılım mimarisindeki somut sorunlara uyarlamasıdır.
+
+### 7.2. Lenarduzzi ve Arkadaşları (2021): Teknik Borcun Önceliklendirilmesi
+
+Lenarduzzi ve arkadaşları (2021), *A systematic literature review on Technical Debt prioritization: Strategies, processes, factors, and tools* başlıklı çalışmalarında teknik borcun önceliklendirilmesinde kullanılan stratejileri, süreçleri, faktörleri ve araçları sistematik biçimde incelemiştir.
+
+Araştırmacılar, literatür taraması kapsamında 557 benzersiz yayını değerlendirmiş ve seçim süreci sonunda 44 birincil çalışmayı analiz etmiştir. Çalışmada teknik borcun önceliklendirilmesi açısından yazılım kalitesi, bakım maliyeti, geliştirici verimliliği ve maliyet-fayda değerlendirmeleri gibi farklı faktörler ele alınmıştır.
+
+Araştırmanın önemli sonuçlarından biri, teknik borcun önceliklendirilmesi için tüm yazılım projelerine uygulanabilecek, genel kabul görmüş tek bir yaklaşımın bulunmamasıdır. Kullanılacak yöntemin yazılım sisteminin özelliklerine ve organizasyonun hedeflerine göre değişebileceği anlaşılmaktadır.
+
+Yanakiev ve arkadaşları (2025), kendi araştırmalarında teknik borcun önceliklendirilmesi bağlamında Lenarduzzi ve arkadaşlarının çalışmasına atıfta bulunmaktadır. ASML sisteminde mevcut yazılım metrikleri, mimari bağımlılık sorunları ve yazılım mimarlarının değerlendirmeleri birlikte kullanılarak refactoring faaliyetleri önceliklendirilmiştir.
+
+Bu ilişki, incelenen makalenin birinci araştırma sorusu (RQ1) açısından önem taşımaktadır. Lenarduzzi ve arkadaşları teknik borcun önceliklendirilmesini literatür düzeyinde ele alırken Yanakiev ve arkadaşları bu yaklaşımı belirli bir endüstriyel ortamda uygulamıştır.
+
+### 7.3. Parnas (1994): Yazılım Yaşlanması
+
+David Lorge Parnas'ın (1994) *Software Aging* başlıklı çalışması, yazılım sistemlerinin zaman içerisinde neden bakım ve sürdürülebilirlik sorunları yaşayabildiğini açıklayan temel araştırmalardan biridir.
+
+Parnas'a göre yazılım yaşlanması yalnızca yazılımın eski bir tarihte geliştirilmiş olmasından kaynaklanmamaktadır. Değişen gereksinimlere uyum sağlanamaması ve yazılım üzerinde gerçekleştirilen değişikliklerin mevcut yapıyı olumsuz etkilemesi de yaşlanma sürecini hızlandırabilmektedir.
+
+Bu yaklaşım, yazılım sistemlerinin uzun vadeli sürdürülebilirliği açısından bakım faaliyetlerinin ve mimari bütünlüğün korunmasının önemini ortaya koymaktadır.
+
+Yanakiev ve arkadaşları (2025), makalelerinin ilgili çalışmalar bölümünde yazılım yaşlanması kavramını tartışırken Parnas'ın araştırmasına atıfta bulunmaktadır.
+
+ASML'nin incelenen C++ sistemi yaklaşık yirmi yıllık geliştirme geçmişine sahiptir. Bu süreçte birikmiş mimari bağımlılık ihlalleri ve teknik borç, bakım faaliyetlerini zorlaştıran önemli sorunlar arasında yer almaktadır.
+
+Dolayısıyla Parnas'ın çalışması, incelenen makalenin ele aldığı legacy sistem probleminin kavramsal arka planını oluşturmaktadır. Yanakiev ve arkadaşlarının araştırması ise bu tür mimari sorunların belirli bir bölümünün refactoring yoluyla nasıl azaltılabileceğine ilişkin uygulamalı bir örnek sunmaktadır.
+
+### 7.4. Abid ve Arkadaşları (2020): Refactoring Araştırmalarının Sınıflandırılması
+
+Abid ve arkadaşları (2020), *30 Years of Software Refactoring Research: A Systematic Literature Review* başlıklı çalışmalarında yazılım refactoring alanındaki araştırmaları sistematik biçimde incelemiş ve farklı araştırma yaklaşımlarını sınıflandırmaya yönelik bir taksonomi geliştirmiştir.
+
+Çalışmada refactoring faaliyetleri; yaşam döngüsü, otomasyon düzeyi, incelenen yazılım öğeleri, programlama paradigmaları ve değerlendirme yöntemleri gibi farklı boyutlarda ele alınmaktadır.
+
+Yanakiev ve arkadaşları (2025), makalelerinin 2.1. bölümünde Abid ve arkadaşlarının taksonomisinden yararlanarak kendi araştırmalarını refactoring literatürü içerisinde konumlandırmaktadır.
+
+İncelenen çalışma; refactoring fırsatlarının tespit edilmesi ve önceliklendirilmesi, otomatik tespit araçları ve yarı otomatik önceliklendirme desteğiyle manuel refactoring gerçekleştirilmesi, mimari tasarım prensiplerinin kullanılması ve gerçek bir endüstriyel C++ sisteminde değerlendirme yapılması gibi özelliklere sahiptir.
+
+Bu bağlamda Abid ve arkadaşlarının araştırması, Yanakiev ve arkadaşlarının çalışmasının yalnızca bir kod düzenleme uygulaması olmadığını, refactoring literatüründeki belirli araştırma kategorileriyle ilişkili olduğunu göstermektedir.
+
+Bu kaynak özellikle ikinci araştırma sorusunun (RQ2) bilimsel bağlamda değerlendirilmesine katkıda bulunmaktadır.
+
+### 7.5. Literatürün Karşılaştırmalı Değerlendirilmesi
+
+İncelenen dört akademik kaynak, Yanakiev ve arkadaşlarının (2025) araştırmasını farklı açılardan desteklemektedir.
+
+| Akademik çalışma | Temel odak | İncelenen makaleyle ilişkisi |
+|---|---|---|
+| Martin (2003) | SOLID ve OOP tasarım prensipleri | DIP'nin teorik temeli |
+| Lenarduzzi ve ark. (2021) | Teknik borcun önceliklendirilmesi | RQ1'in bilimsel altyapısı |
+| Parnas (1994) | Yazılım yaşlanması | Legacy sistemlerde bakım probleminin açıklanması |
+| Abid ve ark. (2020) | Refactoring araştırmalarının sınıflandırılması | Refactoring yaklaşımının literatürde konumlandırılması |
+
+Martin'in çalışması yazılımın nasıl tasarlanması gerektiğine, Parnas'ın çalışması yazılım sistemlerinin zaman içerisinde neden bakım sorunları yaşayabildiğine, Lenarduzzi ve arkadaşlarının araştırması hangi teknik borç sorunlarının öncelikle ele alınması gerektiğine ve Abid ve arkadaşlarının incelemesi refactoring faaliyetlerinin bilimsel literatürde nasıl sınıflandırıldığına odaklanmaktadır.
+
+Bu çalışmalar birlikte değerlendirildiğinde Yanakiev ve arkadaşlarının araştırmasının tasarım prensipleri, teknik borç yönetimi ve yazılım bakımına ilişkin önceki bilimsel yaklaşımları endüstriyel bir problem etrafında birleştirdiği görülmektedir.
+
+İncelenen makalenin temel katkısı, SOLID prensiplerini ilk kez ortaya koymak veya teknik borç kavramını yeniden tanımlamak değildir. Araştırmacılar, mevcut bilimsel bilgi birikiminden yararlanarak ASML'nin legacy C++ sistemindeki belirli mimari bağımlılık sorunlarına yönelik tekrarlanabilir refactoring kalıpları geliştirmiş ve bu kalıpların uygulanmasını değerlendirmiştir.
+
+Bununla birlikte, seçilen kaynakların yayın türleri ve araştırma yaklaşımları farklıdır. Martin'in eseri tasarım prensiplerini açıklayan bir kitap, Parnas'ın çalışması bir konferans bildirisi, Lenarduzzi ve arkadaşlarının araştırması hakemli bir dergide yayımlanmış sistematik literatür taraması, Abid ve arkadaşlarının incelenen sürümü ise arXiv üzerinde erişilebilen sistematik literatür incelemesidir.
+
+Bu nedenle söz konusu kaynaklar değerlendirilirken her birinin sunduğu kanıt türü ve araştırma kapsamı dikkate alınmalıdır.
+
+Sonuç olarak literatür incelemesi, Yanakiev ve arkadaşlarının (2025) çalışmasının hem nesneye dayalı programlama prensipleriyle hem de yazılım mühendisliğindeki bakım, teknik borç ve refactoring araştırmalarıyla güçlü bir kavramsal ilişki içerisinde olduğunu göstermektedir.
 
 ## 8. Kişisel Değerlendirme ve Geliştirme Önerileri
 
