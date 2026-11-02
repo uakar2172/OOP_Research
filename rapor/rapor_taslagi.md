@@ -415,9 +415,65 @@ Bu nedenle söz konusu kaynaklar değerlendirilirken her birinin sunduğu kanıt
 
 Sonuç olarak literatür incelemesi, Yanakiev ve arkadaşlarının (2025) çalışmasının hem nesneye dayalı programlama prensipleriyle hem de yazılım mühendisliğindeki bakım, teknik borç ve refactoring araştırmalarıyla güçlü bir kavramsal ilişki içerisinde olduğunu göstermektedir.
 
-## 8. Kişisel Değerlendirme ve Geliştirme Önerileri
+## 8. Eleştirel Değerlendirme ve Geliştirme Önerileri
 
-*Makalenin güçlü yönleri, sınırlılıkları ve geliştirilebilecek noktaları gerekçeleriyle değerlendirilecektir.*
+Yanakiev, Lazar ve Capiluppi (2025) tarafından gerçekleştirilen araştırma, nesneye dayalı tasarım prensiplerinin büyük ölçekli legacy yazılım sistemlerinde uygulanmasına ilişkin önemli bir endüstriyel deneyim sunmaktadır. Çalışmanın temel katkısı, Dependency Inversion Principle (DIP) prensibinin mevcut bir C/C++ sistemindeki mimari bağımlılık sorunlarına yönelik somut refactoring kalıplarına dönüştürülmesidir.
+
+Bununla birlikte, araştırmanın güçlü yönleri kadar yöntemsel sınırlılıklarının da değerlendirilmesi gerekmektedir. Bu bölümde makalenin bilimsel ve teknik katkıları, geçerliliğini etkileyebilecek unsurlar ve gelecekteki çalışmalar için geliştirilebilecek öneriler ele alınmaktadır.
+
+### 8.1. Araştırmanın Güçlü Yönleri
+
+Çalışmanın önemli güçlü yönlerinden biri, önerilen yaklaşımın gerçek bir endüstriyel sistem üzerinde uygulanmış olmasıdır. Araştırmacılar, ASML'nin uzun yıllardır geliştirilen legacy C/C++ kod tabanındaki mimari bağımlılık sorunlarını incelemiş ve belirli refactoring işlemlerini gerçekleştirmiştir. Bu durum, SOLID prensiplerinin yalnızca teorik tasarım kuralları olarak değil, gerçek yazılım bakım problemlerine yönelik uygulama rehberleri olarak da kullanılabileceğini göstermektedir.
+
+Araştırmanın ikinci güçlü yönü, refactoring öncesinde veri odaklı önceliklendirme yapılmasıdır. Yazılım metrikleri, etki analizi ve ASML mimarlarının alan bilgisi bir arada değerlendirilerek bakım açısından öncelikli sorunlar belirlenmiştir. Büyük ve karmaşık sistemlerde bütün teknik borcun tek seferde giderilmesinin güç olduğu düşünüldüğünde, bu yaklaşımın kaynakların daha etkili kullanılmasına katkı sağlayabileceği değerlendirilmektedir.
+
+Üçüncü önemli katkı, DIP prensibinden hareketle yedi refactoring kalıbının geliştirilmesidir. Araştırmacılar, mimari bağımlılık sorunlarını sınıflandırmış ve mevcut durum ile hedeflenen yapı arasındaki dönüşümü açıklayan uygulama örnekleri sunmuştur. Bu kalıplar, benzer bağımlılık sorunlarının daha tutarlı biçimde ele alınmasını desteklemektedir.
+
+Çalışmada artımlı refactoring yaklaşımının benimsenmesi de olumlu bir özelliktir. Mevcut sistemin tamamen yeniden yazılması yerine belirli mimari sorunlara odaklanılması, endüstriyel yazılım geliştirme süreçlerinin operasyonel kısıtlarıyla uyumlu bir yöntem sunmaktadır.
+
+### 8.2. Yöntemsel Sınırlılıklar ve Geçerlilik Tehditleri
+
+Makalenin önemli sınırlılıklarından biri, araştırmanın tek bir endüstriyel bağlamda yürütülmüş olmasıdır. Yanakiev ve arkadaşları (2025), çalışmanın *Threats to Validity* bölümünde ASML'nin kendine özgü teknolojilerinin, mimari yapısının ve geliştirme uygulamalarının sonuçların genellenebilirliğini sınırlandırabileceğini belirtmektedir.
+
+Bu durum, araştırmanın dış geçerliliği açısından önem taşımaktadır. ASML sisteminde başarılı biçimde uygulanan refactoring kalıplarının farklı şirketlerde veya farklı yazılım mimarilerinde aynı sonuçları sağlayacağı doğrudan varsayılamaz. Kalıpların başka sistemlere uyarlanabilir olduğu yönündeki değerlendirmelerin daha güçlü biçimde desteklenmesi için farklı endüstriyel ortamlarda ek uygulamalara ihtiyaç bulunmaktadır.
+
+İç geçerlilik açısından araştırmacılar, refactoring kalıplarının oluşturulmasında mevcut bağımlılıkların analizinden ve ASML yazılım mimarlarının görüşlerinden yararlandıklarını açıklamaktadır. Alan uzmanlarının araştırmaya katkısı, mimari problemlerin doğru yorumlanması açısından önemli bir avantajdır. Bununla birlikte, önceliklendirme kararlarının ve uygulama sonuçlarının bağımsız ölçümlerle daha ayrıntılı doğrulanması, yöntemin güvenilirliğini güçlendirebilir.
+
+Araştırma verilerinin gizli olması da bağımsız yeniden üretilebilirlik açısından bir sınırlılıktır. Endüstriyel kaynak kodun paylaşılmaması anlaşılabilir bir durum olmakla birlikte, farklı araştırmacıların aynı işlemleri aynı veri üzerinde tekrar etmesini güçleştirmektedir. Bu durum tek başına bulguların geçersiz olduğu anlamına gelmemekte; ancak araştırmanın bağımsız olarak doğrulanabilmesini sınırlandırmaktadır.
+
+### 8.3. Bulguların Eleştirel Değerlendirilmesi
+
+Araştırmacılar, refactoring faaliyetleri sonucunda incelenen dört uygunsuz mimari bağımlılıktan ikisinin giderildiğini ve böylece genel kapsamda %50 azalma elde edildiğini bildirmektedir. Ayrıca uygunsuz kullanılan dışa aktarılmış sembollerin sayısında %85'in üzerinde azalma sağlandığı belirtilmektedir.
+
+Bu sonuçlar, gerçekleştirilen refactoring işlemlerinin mimari bağımlılıkların azaltılması açısından ölçülebilir katkılar sunduğunu göstermektedir. Bununla birlikte, sonuçların yorumlanmasında kullanılan ölçütlerin kapsamı dikkate alınmalıdır.
+
+Örneğin makalenin 6.1. bölümünde uygunsuz bağımlılıkların %33 oranında azaltıldığı belirtilirken sonuç bölümünde %50 oranı raporlanmaktadır. Bu oranların farklı kapsamlara karşılık gelmesi mümkündür. Ancak hesaplamalarda kullanılan başlangıç değerlerinin ve kapsamların daha açık biçimde sunulması, sonuçların anlaşılmasını ve karşılaştırılmasını kolaylaştıracaktır. Dolayısıyla bu durum kesin bir hesaplama hatası olarak değil, sonuçların raporlanmasında geliştirilebilecek bir açıklık sorunu olarak değerlendirilmelidir.
+
+Çalışmanın bir diğer sınırlılığı, planlanan refactoring faaliyetlerinin tamamının gerçekleştirilememiş olmasıdır. Özellikle ortak bileşenlerle ilişkili bazı düzenlemeler, birden fazla ekibin koordinasyonunu gerektirdiğinden araştırma kapsamı dışında kalmıştır. Bu nedenle bildirilen iyileşmelerin bütün mimari teknik borcun ortadan kaldırıldığı şeklinde yorumlanmaması gerekir.
+
+Ayrıca makale, mimari bağımlılıkların azaltılmasına ilişkin önemli nicel sonuçlar sunmasına rağmen bu değişikliklerin yazılımın uzun vadeli bakım maliyeti, hata düzeltme süresi veya geliştirici verimliliği üzerindeki etkilerini aynı ayrıntıda ölçmemektedir. Bu tür göstergeler, gerçekleştirilen mimari iyileştirmelerin operasyonel faydalarını değerlendirmek açısından tamamlayıcı nitelikte olacaktır.
+
+### 8.4. Geliştirme Önerileri
+
+Araştırmanın dış geçerliliğini güçlendirmek amacıyla geliştirilen refactoring kalıpları farklı şirketlerde ve yazılım mimarilerinde değerlendirilebilir. Özellikle katmanlı mimariye sahip farklı C++ sistemlerinde ve benzer bağımlılık problemleri bulunan diğer nesneye dayalı yazılım projelerinde yapılacak karşılaştırmalı çalışmalar, kalıpların uygulanabilirlik sınırlarının belirlenmesini sağlayabilir.
+
+Bağımsız yeniden üretilebilirliği artırmak amacıyla araştırmacıların karşılaştığı mimari bağımlılık sorunlarını temsil eden anonimleştirilmiş örnek projeler hazırlanabilir. Bu projelerde refactoring öncesi ve sonrası bağımlılık yapıları, uygulanan dönüşümler ve doğrulama adımları gösterilebilir. Böylece kurumsal gizlilik korunurken araştırmanın yöntemsel şeffaflığı artırılabilir.
+
+Sonuçların raporlanması açısından her refactoring işlemi için başlangıçtaki bağımlılık sayısını, işlem sonrasındaki bağımlılık sayısını ve elde edilen iyileşme oranını gösteren standart tablolar oluşturulması önerilmektedir. Ayrıca mimari bağımlılık sayısı ile sembol düzeyindeki bağımlılık sayısının ayrı ölçütler olarak sunulması, farklı başarı göstergelerinin karıştırılmasını önleyebilir.
+
+Gelecekteki araştırmalarda refactoring faaliyetlerinin uzun vadeli bakım performansına etkisi de incelenebilir. Bakım süresi, değişiklik maliyeti, hata düzeltme süresi ve geliştirici iş yükü gibi ölçütlerin refactoring öncesinde ve sonrasında karşılaştırılması, mimari iyileştirmelerin pratik faydalarının daha kapsamlı değerlendirilmesine yardımcı olabilir. Bununla birlikte, böyle bir karşılaştırmada ekip deneyimi ve geliştirme süreçlerindeki değişiklikler gibi diğer faktörlerin etkileri de dikkate alınmalıdır.
+
+Son olarak, araştırma kapsamında tamamlanamayan mimari düzenlemeler için uzun vadeli bir takip süreci oluşturulabilir. Böylece artımlı refactoring yaklaşımının yalnızca ilk aşamadaki sonuçları değil, sonraki bakım dönemlerindeki sürdürülebilirliği de incelenebilir.
+
+### 8.5. Genel Akademik Değerlendirme
+
+Yanakiev ve arkadaşlarının (2025) araştırması, SOLID tasarım prensiplerinin legacy yazılım sistemlerindeki mimari problemlere uygulanmasına yönelik değerli bir endüstriyel örnek sunmaktadır. Çalışmanın en önemli katkısı, DIP prensibini uygulanabilir refactoring kalıplarına dönüştürmesi ve bu kalıpları veri odaklı önceliklendirme yaklaşımıyla birlikte kullanmasıdır.
+
+Bununla birlikte, çalışmanın tek bir endüstriyel ortamla sınırlı olması, verilerin gizliliği, refactoring işlemlerinin tamamının gerçekleştirilememesi ve uzun vadeli bakım performansının sınırlı ölçüde değerlendirilmesi, bulguların yorumlanmasında dikkat edilmesi gereken unsurlardır.
+
+Bu değerlendirme sonucunda, makalenin temel araştırma sorularına uygulamalı ve ölçülebilir yanıtlar sunduğu; ancak önerilen yaklaşımın farklı sistemlerde doğrulanması ve bakım performansına uzun vadeli etkilerinin ölçülmesiyle bilimsel katkısının daha da güçlendirilebileceği sonucuna ulaşılmıştır.
+
+Genel olarak çalışma, nesneye dayalı programlama prensipleri ile yazılım bakım süreçleri arasındaki ilişkiyi gerçek bir endüstriyel problem üzerinden göstermesi bakımından başarılı bir uygulama örneği olarak değerlendirilmektedir.
 
 ## 9. Genel Sonuç
 
