@@ -2,7 +2,19 @@
 
 ## 1. Giriş
 
-*Bu bölümde araştırmanın konusu, önemi ve incelemenin amacı açıklanacaktır.*
+Yazılım sistemlerinin uzun yıllar boyunca geliştirilmesi ve değişen gereksinimlere uyarlanması, yazılım mühendisliğinde bakım yapılabilirlik ve sürdürülebilirlik açısından önemli sorunlar ortaya çıkarabilmektedir. Özellikle büyük ölçekli yazılım projelerinde zaman içerisinde biriken karmaşık bağımlılıklar, mimari kuralların ihlal edilmesi ve bileşenler arasındaki sıkı bağlılıklar, mevcut sistemlerin geliştirilmesini ve bakımını zorlaştırmaktadır. Bu tür sorunlar, yazılım mühendisliğinde teknik borç (technical debt) kavramı kapsamında değerlendirilmektedir.
+
+Teknik borcun önemli türlerinden biri olan mimari teknik borç (architectural technical debt), yazılım bileşenlerinin organizasyonundan ve aralarındaki bağımlılık ilişkilerinden kaynaklanmaktadır. Mimari teknik borcun birikmesi, yazılımın anlaşılabilirliğini ve değiştirilebilirliğini olumsuz etkileyebilmektedir. Parnas (1994), yazılım sistemlerinin yaşlanmasını ele aldığı çalışmasında, değişen gereksinimlere uyum sağlanamamasının ve yazılım üzerinde gerçekleştirilen değişikliklerin sistemin yapısını olumsuz etkileyebilmesinin önemine dikkat çekmiştir.
+
+Bu problemlerin azaltılmasında nesneye dayalı programlama (Object-Oriented Programming — OOP) yaklaşımı ve SOLID tasarım prensipleri önemli bir teorik temel sunmaktadır. Martin (2003) tarafından açıklanan tasarım prensipleri, yazılım bileşenlerinin sorumluluklarının ve bağımlılık ilişkilerinin daha uygun biçimde düzenlenmesine rehberlik etmektedir. Özellikle Dependency Inversion Principle (DIP), bileşenler arasındaki bağımlılıkların soyutlamalar üzerinden düzenlenmesini destekleyen bir tasarım prensibidir.
+
+Mevcut yazılım sistemlerinde bu tür tasarım prensiplerinin uygulanabilmesi için kullanılan yöntemlerden biri refactoring olarak adlandırılmaktadır. Refactoring, yazılımın dışarıdan gözlemlenen davranışı korunurken iç yapısının iyileştirilmesini amaçlamaktadır. Bununla birlikte, büyük ölçekli ve uzun ömürlü yazılım sistemlerinde hangi bileşenlerin öncelikle yeniden düzenleneceğinin belirlenmesi ve soyut tasarım prensiplerinin uygulanabilir işlemlere dönüştürülmesi önemli güçlükler içermektedir.
+
+Bu bağlamda Yanakiev, Lazar ve Capiluppi (2025) tarafından yayımlanan *Applying SOLID principles for the refactoring of legacy code: An experience report* başlıklı çalışma, SOLID tasarım prensiplerinin gerçek bir endüstriyel yazılım sisteminde uygulanmasını incelemektedir. Araştırmacılar, ASML şirketinin uzun yıllardır geliştirilen legacy C/C++ yazılım sisteminde birikmiş mimari teknik borcun azaltılmasına odaklanmıştır. Çalışmada, mevcut yazılım metrikleri ve etki analizi kullanılarak refactoring faaliyetleri önceliklendirilmiş; özellikle DIP prensibinden hareketle mimari bağımlılık sorunlarına yönelik tekrarlanabilir refactoring kalıpları geliştirilmiştir.
+
+Bu akademik makale incelemesinin amacı, Yanakiev ve arkadaşlarının (2025) araştırmasını bilimsel ve teknik açıdan değerlendirmektir. Bu kapsamda öncelikle araştırmanın amacı ve araştırma soruları açıklanmakta; ardından OOP, SOLID, teknik borç ve refactoring kavramlarına ilişkin teorik arka plan sunulmaktadır. Devamında araştırmanın yöntemi, geliştirilen refactoring kalıpları ve elde edilen bulgular incelenmektedir. Ayrıca çalışmanın dayandığı temel akademik kaynaklar değerlendirilmekte; makalenin güçlü yönleri, yöntemsel sınırlılıkları ve gelecekte geliştirilebilecek noktaları ele alınmaktadır.
+
+Bu inceleme aracılığıyla, nesneye dayalı tasarım prensiplerinin yalnızca yeni yazılım sistemlerinin geliştirilmesinde değil, mevcut büyük ölçekli yazılım mimarilerinin iyileştirilmesinde de nasıl kullanılabileceğinin anlaşılması amaçlanmaktadır.
 
 ## 2. Makalenin Amacı ve Araştırma Soruları
 
@@ -33,10 +45,10 @@ Kapsülleme, bir nesnenin verilerinin ve bu veriler üzerinde gerçekleştirilen
 
 Kalıtım, sınıflar arasında tür ilişkileri kurulmasına ve belirli özelliklerin devralınmasına olanak sağlamaktadır. Çok biçimlilik ise farklı nesnelerin ortak bir üst tür veya arayüz üzerinden kullanılabilmesini mümkün kılmaktadır.
 
-Bu kavramlar, büyük ölçekli yazılım sistemlerinde bileşenlerin sorumluluklarını ve birbirleriyle olan ilişkilerini düzenlemek açısından önem taşımaktadır. Bununla birlikte, OOP mekanizmalarının kullanılması tek başına sürdürülebilir bir yazılım mimarisi oluşturulduğu anlamına gelmemektedir. Bileşenler arasındaki bağımlılıkların uygun şekilde tasarlanması da gerekmektedir.
+Bu kavramlar, büyük ölçekli yazılım sistemlerinde bileşenlerin sorumluluklarını ve birbirleriyle olan ilişkilerini düzenlemek açısından önem taşımaktadır(Martin, 2003). Bununla birlikte, OOP mekanizmalarının kullanılması tek başına sürdürülebilir bir yazılım mimarisi oluşturulduğu anlamına gelmemektedir. Bileşenler arasındaki bağımlılıkların uygun şekilde tasarlanması da gerekmektedir.
 
 ### 3.2. SOLID Tasarım Prensipleri
-SOLID, nesneye dayalı yazılım tasarımında bakım yapılabilirliği, genişletilebilirliği ve esnekliği desteklemeyi amaçlayan beş temel tasarım prensibinin baş harflerinden oluşmaktadır.
+SOLID, nesneye dayalı yazılım tasarımında bakım yapılabilirliği, genişletilebilirliği ve esnekliği desteklemeyi amaçlayan beş temel tasarım prensibinin baş harflerinden oluşmaktadır.(Martin, 2003).
 
 Single Responsibility Principle (SRP): Bir sınıfın değişmesi için tek bir temel neden bulunması gerektiğini ifade etmektedir. Sınıfların farklı sorumluluklarla gereğinden fazla yüklenmesini önlemeye yönelik bir tasarım yaklaşımıdır.
 
@@ -56,7 +68,7 @@ Bu bağlamda makale, nesneye dayalı tasarım prensiplerinin büyük ölçekli e
 
 ### 3.3. Legacy Code ve Teknik Borç
 
-Legacy Code (miras kod), geçmişte geliştirilmiş ve günümüzde kullanılmaya devam edilen mevcut yazılım kodunu ifade etmektedir. Bu tür sistemler, uzun yıllar boyunca farklı gereksinimler doğrultusunda değiştirilmiş ve genişletilmiş olabilir. Bir yazılımın eski olması, mutlaka hatalı veya işlevsiz olduğu anlamına gelmemektedir. Bununla birlikte, zaman içerisinde oluşan karmaşık bağımlılıklar, yetersiz dokümantasyon ve tasarım sorunları mevcut sistemlerin bakımını zorlaştırabilmektedir.
+Legacy Code (miras kod), geçmişte geliştirilmiş ve günümüzde kullanılmaya devam edilen mevcut yazılım kodunu ifade etmektedir. Bu tür sistemler, uzun yıllar boyunca farklı gereksinimler doğrultusunda değiştirilmiş ve genişletilmiş olabilir. Bir yazılımın eski olması, mutlaka hatalı veya işlevsiz olduğu anlamına gelmemektedir. Bununla birlikte, zaman içerisinde oluşan karmaşık bağımlılıklar, yetersiz dokümantasyon ve tasarım sorunları mevcut sistemlerin bakımını zorlaştırabilmektedir(Parnas, 1994).
 
 Bu sorunlarla ilişkili temel kavramlardan biri Technical Debt (Teknik Borç) olarak adlandırılmaktadır. Teknik borç, yazılım geliştirme sürecinde alınan tasarım ve uygulama kararlarının gelecekte ek bakım ve geliştirme maliyetlerine neden olmasını ifade etmektedir. Teknik borç, kısa vadede zaman kazanmak amacıyla yapılan bilinçli tercihler sonucunda oluşabileceği gibi yazılımın zaman içerisinde değişen gereksinimlere yeterince uyarlanamaması nedeniyle de birikebilmektedir.
 
@@ -74,7 +86,7 @@ Dolayısıyla makalenin temel problemi, yalnızca eski kodların okunabilirliği
 
 Refactoring (yeniden düzenleme), bir yazılımın dışarıdan gözlemlenen davranışı korunurken iç yapısının iyileştirilmesi işlemidir. Bu yaklaşım, mevcut kodun bakım yapılabilirliğini, anlaşılabilirliğini ve gelecekte değiştirilebilirliğini artırmayı amaçlamaktadır.
 
-Refactoring işlemleri arasında uzun metotların daha küçük metotlara ayrılması, sınıfların sorumluluklarının yeniden düzenlenmesi ve yazılım bileşenleri arasındaki bağımlılıkların iyileştirilmesi yer alabilmektedir.
+Refactoring işlemleri arasında uzun metotların daha küçük metotlara ayrılması, sınıfların sorumluluklarının yeniden düzenlenmesi ve yazılım bileşenleri arasındaki bağımlılıkların iyileştirilmesi yer alabilmektedir(Abid et al., 2020).
 
 Refactoring, yeni özellik geliştirme veya mevcut bir hatayı düzeltme işlemlerinden farklıdır. Temel amaç, sistemin sunduğu işlevleri değiştirmeden yazılımın iç tasarımını iyileştirmektir. Bu nedenle refactoring sürecinde mevcut davranışın korunmasının doğrulanması önem taşımaktadır.
 
@@ -128,7 +140,8 @@ Makalenin Tablo 1'inde belirtilen öncelik sıralaması şöyledir:
 
 Mimari kurallara aykırı bağımlılıkların azaltılması, araştırmanın temel hedefiyle doğrudan ilişkili olduğu için en yüksek önceliğe yerleştirilmiştir.
 
-Bununla birlikte, bu sıralama yazılım kalitesi açısından bütün projelerde geçerli olan genel bir değerlendirme değildir. Araştırmacıların belirlediği öncelikler, ASML'nin mimari sorunları, bakım ihtiyaçları ve çalışmanın uygulanabilirlik sınırları çerçevesinde oluşturulmuştur.
+Bununla birlikte, bu sıralama yazılım kalitesi açısından bütün projelerde geçerli olan genel bir değerlendirme değildir(Lenarduzzi et al., 2021).
+Araştırmacıların belirlediği öncelikler, ASML'nin mimari sorunları, bakım ihtiyaçları ve çalışmanın uygulanabilirlik sınırları çerçevesinde oluşturulmuştur.
 
 ### 4.4. Refactoring Yapılacak Bileşenlerin Seçilmesi
 
@@ -477,8 +490,34 @@ Genel olarak çalışma, nesneye dayalı programlama prensipleri ile yazılım b
 
 ## 9. Genel Sonuç
 
-*İncelemeden elde edilen temel çıkarımlar ve çalışmanın nesneye dayalı programlama açısından önemi özetlenecektir.*
+Bu çalışmada Yanakiev, Lazar ve Capiluppi (2025) tarafından yayımlanan *Applying SOLID principles for the refactoring of legacy code: An experience report* başlıklı akademik makale incelenmiştir. Araştırmanın amacı, yöntemi, elde edilen bulgular ve nesneye dayalı programlama prensipleriyle ilişkisi değerlendirilmiş; ayrıca çalışmanın bilimsel dayanakları, güçlü yönleri ve yöntemsel sınırlılıkları ele alınmıştır.
+
+İncelenen makale, büyük ölçekli ve uzun yıllardır geliştirilen yazılım sistemlerinde biriken mimari teknik borcun azaltılmasına odaklanmaktadır. Araştırmacılar, ASML şirketinin legacy C/C++ yazılım sistemindeki uygunsuz mimari bağımlılıkları belirlemiş ve bu bağımlılıkların giderilmesinde SOLID tasarım prensiplerinden, özellikle Dependency Inversion Principle (DIP) prensibinden yararlanmıştır.
+
+Araştırmanın birinci araştırma sorusu (RQ1), veri odaklı önceliklendirme yaklaşımının mimari teknik borcun azaltılmasına nasıl katkı sağladığıyla ilgilidir. Makalede mevcut yazılım metriklerinin, etki analizinin ve yazılım mimarlarının alan bilgisinin birlikte kullanılarak refactoring açısından öncelikli bileşenlerin belirlendiği görülmektedir. Bu yaklaşım, büyük ölçekli sistemlerde bütün sorunların aynı anda giderilmesi yerine, bakım kaynaklarının öncelikli mimari problemlere yönlendirilmesinin önemini ortaya koymaktadır.
+
+İkinci araştırma sorusu (RQ2), SOLID tasarım prensiplerinin somut refactoring işlemlerine nasıl dönüştürülebileceğini ele almaktadır. Araştırmacılar, DIP prensibinden hareketle makineye özgü ve ortak bileşenlerde kullanılmak üzere toplam yedi refactoring kalıbı geliştirmiştir. Bu kalıplar aracılığıyla sembollerin uygun mimari katmanlara taşınması, kapsüllenmesi ve gereksiz bağımlılıkların giderilmesi hedeflenmiştir. Böylece soyut bir yazılım tasarım prensibinin, mevcut bir endüstriyel kod tabanında uygulanabilir düzenleme adımlarına dönüştürülebileceği gösterilmiştir.
+
+Araştırmanın sonuç bölümünde, incelenen dört uygunsuz mimari bağımlılıktan ikisinin giderildiği ve bu kapsamda %50 azalma elde edildiği bildirilmektedir. Ayrıca uygunsuz kullanılan dışa aktarılmış sembollerin sayısında %85'in üzerinde azalma sağlandığı belirtilmektedir (Yanakiev et al., 2025). Bu bulgular, gerçekleştirilen refactoring işlemlerinin seçilen mimari bağımlılık sorunlarını azaltmada etkili olduğunu göstermektedir. Bununla birlikte elde edilen sonuçlar, sistemdeki bütün teknik borcun ortadan kaldırıldığı şeklinde yorumlanmamalıdır.
+
+Makalenin nesneye dayalı programlama açısından en önemli katkısı, soyutlama, kapsülleme, modülerlik ve bağımlılık yönetimi gibi temel tasarım kavramlarının gerçek yazılım bakım problemleriyle ilişkilendirilmesidir. Özellikle DIP prensibinin yalnızca sınıflar arasındaki ilişkiler açısından değil, bileşenler ve mimari katmanlar arasındaki bağımlılıkların düzenlenmesinde de kullanılabileceği anlaşılmaktadır.
+
+Gerçekleştirilen literatür incelemesi de araştırmanın bilimsel arka planını desteklemektedir. Martin'in (2003) tasarım prensiplerine ilişkin yaklaşımı, Parnas'ın (1994) yazılım yaşlanması hakkındaki değerlendirmeleri, Lenarduzzi ve arkadaşlarının (2021) teknik borcun önceliklendirilmesine yönelik araştırması ve Abid ve arkadaşlarının (2020) refactoring literatürünü sınıflandıran çalışması, incelenen makalenin yazılım mühendisliği alanındaki yerinin anlaşılmasına katkıda bulunmuştur.
+
+Bununla birlikte araştırmanın tek bir endüstriyel ortamda gerçekleştirilmesi, kullanılan verilerin gizli olması ve bazı refactoring işlemlerinin çalışma kapsamında tamamlanamaması önemli sınırlılıklar oluşturmaktadır. Gelecekte geliştirilen kalıpların farklı sistemlerde değerlendirilmesi, anonimleştirilmiş örnek uygulamalarla desteklenmesi ve bakım maliyeti ile hata düzeltme süresi gibi uzun vadeli göstergelerin ölçülmesi, araştırmanın sonuçlarını daha güçlü biçimde doğrulamaya yardımcı olabilir.
+
+Bu makale incelemesinden elde edilen temel çıkarım, **iyi bir yazılım mimarisinin yalnızca başlangıçta doğru tasarlanmakla korunamayacağı; değişen gereksinimler karşısında sürekli olarak değerlendirilmesi ve gerektiğinde sistematik refactoring faaliyetleriyle iyileştirilmesi gerektiğidir.** Ayrıca yazılım bakımında yalnızca bir problemin nasıl çözüleceğinin değil, hangi problemin öncelikle çözülmesi gerektiğinin de önemli olduğu anlaşılmaktadır.
+
+Sonuç olarak Yanakiev ve arkadaşlarının (2025) araştırması, SOLID tasarım prensiplerinin legacy yazılım sistemlerindeki mimari teknik borcun azaltılmasında nasıl kullanılabileceğine ilişkin değerli bir endüstriyel deneyim sunmaktadır. Çalışma, nesneye dayalı programlama prensiplerinin teorik öneminin yanında büyük ölçekli yazılım sistemlerinin sürdürülebilirliği açısından pratik değerini de ortaya koymaktadır.
 
 ## Kaynakça
 
-*İncelenen makale ve araştırma sürecinde yararlanılan akademik kaynaklar burada listelenecektir.*
+Abid, C., Alizadeh, V., Kessentini, M., do Nascimento Ferreira, T., & Dig, D. (2020). *30 years of software refactoring research: A systematic literature review*. arXiv. https://arxiv.org/abs/2007.02194
+
+Lenarduzzi, V., Besker, T., Taibi, D., Martini, A., & Fontana, F. A. (2021). A systematic literature review on technical debt prioritization: Strategies, processes, factors, and tools. *Journal of Systems and Software, 171*, Article 110827. https://doi.org/10.1016/j.jss.2020.110827
+
+Martin, R. C. (2003). *Agile software development: Principles, patterns, and practices*. Prentice Hall PTR.
+
+Parnas, D. L. (1994). Software aging. In *Proceedings of the 16th International Conference on Software Engineering* (pp. 279–287). https://doi.org/10.1109/ICSE.1994.296790
+
+Yanakiev, I., Lazar, B.-M., & Capiluppi, A. (2025). Applying SOLID principles for the refactoring of legacy code: An experience report. *Journal of Systems and Software, 220*, Article 112254. https://doi.org/10.1016/j.jss.2024.112254
